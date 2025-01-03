@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Include meta tags and CSS links -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects Manager - Edit Project</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container my-4">
+
+  <div class="row">
+      <div class="col-md-8 mx-auto rounded border p-4">
+          <h2 class="text-center mb-5">Edit Project</h2>
+
+          <!-- Project ID Display -->
+          <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Project ID</label>
+              <div class="col-sm-8">
+                  <input class="form-control-plaintext" readonly th:value="${project.id}">
+              </div>
+          </div>
+
+          <!-- Form Starts Here -->
+          <form method="post" th:object="${projectDto}">
+              <!-- Hidden ID Field -->
+              <input type="hidden" th:field="*{id}"/>
+
+              <!-- Name Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Name</label>
+                  <div class="col-sm-8">
+                      <input class="form-control" th:field="*{name}">
+                      <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+                  </div>
+              </div>
+
+              <!-- Client Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Client</label>
+                  <div class="col-sm-8">
+                      <input class="form-control" th:field="*{client}">
+                      <p th:if="${#fields.hasErrors('client')}" class="text-danger" th:errors="*{client}"></p>
+                  </div>
+              </div>
+
+              <!-- Lead Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Lead</label>
+                  <div class="col-sm-8">
+                      <input class="form-control" th:field="*{lead}">
+                      <p th:if="${#fields.hasErrors('lead')}" class="text-danger" th:errors="*{lead}"></p>
+                  </div>
+              </div>
+
+              <!-- Lead Email Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Lead Email</label>
+                  <div class="col-sm-8">
+                      <input class="form-control" th:field="*{leadEmail}">
+                      <p th:if="${#fields.hasErrors('leadEmail')}" class="text-danger" th:errors="*{leadEmail}"></p>
+                  </div>
+              </div>
+
+              <!-- Start Date Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Start Date</label>
+                  <div class="col-sm-8">
+                      <input type="date" class="form-control-plaintext" readonly th:field="*{startDate}">
+                  </div>
+              </div>
+
+			  <div class="row mb-3">
+			    <label class="col-sm-4 col-form-label">End Date</label>
+			    <div class="col-sm-8">
+			        <input type="date" class="form-control" th:field="*{endDate}">
+			        <p th:if="${#fields.hasErrors('endDate')}" class="text-danger" th:errors="*{endDate}"></p>
+			        <p th:if="${#fields.hasErrors() && !#fields.hasErrors('startDate') && !#fields.hasErrors('endDate')}" class="text-danger">
+			            End date must be after start date and cannot be the same as start date.
+			        </p>
+			    </div>
+			  </div>
+
+              <!-- Category Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Category</label>
+                  <div class="col-sm-8">
+                      <select class="form-select" th:field="*{category}">
+                          <option value='Development'>Development</option>
+                          <option value='Archived'>Archived</option>
+                      </select>
+                      <p th:if="${#fields.hasErrors('category')}" class="text-danger" th:errors="*{category}"></p>
+                  </div>
+              </div>
+
+              <!-- Status Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Status</label>
+                  <div class="col-sm-8">
+                      <select class="form-select" th:field="*{status}">
+                          <option value='New'>New</option>
+                          <option value='In Progress'>In progress</option>
+                          <option value='Testing'>Testing</option>
+                          <option value='Finished'>Finished</option>
+                      </select>
+                      <p th:if="${#fields.hasErrors('status')}" class="text-danger" th:errors="*{status}"></p>
+                  </div>
+              </div>
+
+              <!-- Priority Field -->
+              <div class="row mb-3">
+                  <label class="col-sm-4 col-form-label">Priority</label>
+                  <div class="col-sm-8">
+                      <select class="form-select" th:field="*{priority}">
+                          <option value='Low'>Low</option>
+                          <option value='Medium'>Medium</option>
+                          <option value='High'>High</option>
+                      </select>
+                      <p th:if="${#fields.hasErrors('priority')}" class="text-danger" th:errors="*{priority}"></p>
+                  </div>
+              </div>
+
+              <!-- Submit and Cancel Buttons -->
+              <div class="row">
+                  <div class="offset-sm-4 col-sm-4 d-grid">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                  <div class="col-sm-4 d-grid">
+                      <a class="btn btn-outline-primary" href="/projects">Cancel</a>
+                  </div>
+              </div>
+          </form>
+          <!-- Form Ends Here -->
+      </div>
+  </div>
+
+</div>
+<!-- Include JavaScript files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
